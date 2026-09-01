@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Order Details - TWME</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/documents.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside id="sidebar-container"></aside>
+    <main class="main-content">
+      <header class="page-header" id="po-header">Loading...</header>
+      
+      <div class="tab-bar" id="tab-bar">
+        <button class="tab active" data-tab="purchase-order">Purchase Order (1)</button>
+        <button class="tab" data-tab="fulfillment">Fulfillment (0)</button>
+        <button class="tab" data-tab="delivery">Delivery (0)</button>
+        <button class="tab" data-tab="summary">Summary</button>
+      </div>
+      
+      <div id="tab-content">Loading...</div>
+    </main>
+  </div>
+  <script type="module" src="/js/purchase-order.js"></script>
+</body>
+</html>

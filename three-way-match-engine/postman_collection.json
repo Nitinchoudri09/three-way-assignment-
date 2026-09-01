@@ -1,0 +1,195 @@
+{
+  "info": {
+    "name": "Three-Way Match Engine API",
+    "description": "Complete API collection for the Three-Way Match Engine",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api", "type": "string" },
+    { "key": "token", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\": \"admin\", \"password\": \"admin123\"}" }
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["pm.test('Login success', () => { pm.response.to.have.status(200); const body = pm.response.json(); pm.environment.set('token', body.data.token); });"] }
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "List Documents",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/documents?type=purchase_order", "query": [{"key":"type","value":"purchase_order"}] },
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "List Documents by PO Number",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/documents?poNumber=PO10001", "query": [{"key":"poNumber","value":"PO10001"}] },
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Upload Document",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/documents/upload",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "/path/to/document.pdf" },
+                { "key": "documentType", "value": "purchase_order", "type": "text" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Document by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/documents/{{documentId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Document File",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/documents/{{documentId}}/file",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Match",
+      "item": [
+        {
+          "name": "Get Match Result - PO10001 (Matched)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/match/PO10001",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Match Result - PO10002 (Partially Matched)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/match/PO10002",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Match Result - PO10003 (Qty Mismatch)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/match/PO10003",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Match Result - PO10004 (Price Mismatch)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/match/PO10004",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Match Result - PO10005 (Insufficient)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/match/PO10005",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Summary",
+      "item": [
+        {
+          "name": "Get Summary - PO10001",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/summary/PO10001",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "SKU Master",
+      "item": [
+        {
+          "name": "List SKUs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/masters/sku",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Search SKUs",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/masters/sku?search=Bikaji", "query": [{"key":"search","value":"Bikaji"}] },
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Create SKU",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/masters/sku",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"erpCode\":\"TEST-001\",\"skuName\":\"Test Product\",\"eanCode\":\"1234567890\",\"hsnCode\":\"21069099\",\"uom\":\"PCS\",\"agreedRate\":100,\"mrp\":120,\"priceTolerance\":0.05}" }
+          }
+        },
+        {
+          "name": "Update SKU",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/masters/sku/{{skuId}}",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"agreedRate\":110,\"priceTolerance\":0.03}" }
+          }
+        },
+        {
+          "name": "Delete SKU",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/masters/sku/{{skuId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Three-Way Match Engine</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside id="sidebar-container"></aside>
+    <main class="main-content">
+      <header class="top-header">
+        <h1>Three-Way Match Engine</h1>
+        <div class="header-actions">
+          <input type="search" placeholder="Search PO number..." id="po-search">
+          <button class="btn btn-primary" id="upload-btn">+ Upload Document</button>
+        </div>
+      </header>
+      
+      <div class="content-area">
+        <div class="stat-cards" id="stat-cards">Loading...</div>
+        
+        <div class="card">
+          <div class="card-header">Recent Purchase Orders</div>
+          <div class="card-body">
+            <div id="po-table-container">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <div id="upload-modal-container"></div>
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

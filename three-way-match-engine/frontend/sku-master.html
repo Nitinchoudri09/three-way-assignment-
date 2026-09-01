@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKU Master - TWME</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside id="sidebar-container"></aside>
+    <main class="main-content">
+      <header class="top-header">
+        <h1>SKU Master</h1>
+        <div class="header-actions">
+          <input type="search" placeholder="Search SKU..." id="sku-search">
+          <button class="btn btn-primary" id="add-sku-btn">+ Add SKU</button>
+        </div>
+      </header>
+      
+      <div class="content-area">
+        <div class="card">
+          <div class="card-body" id="sku-table-container">Loading...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="sku-modal-container"></div>
+  <script type="module" src="/js/sku-master.js"></script>
+</body>
+</html>

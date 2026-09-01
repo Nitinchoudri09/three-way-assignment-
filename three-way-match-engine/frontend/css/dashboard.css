@@ -1,0 +1,26 @@
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#po-search {
+  width: 250px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#po-search:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.data-table tr {
+  cursor: pointer;
+}
+
+.data-table tr:hover {
+  background-color: #F8FAFC;
+}

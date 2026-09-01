@@ -1,0 +1,44 @@
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 64px;
+  }
+  
+  .sidebar-header {
+    font-size: 12px;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .sidebar-item span {
+    display: none;
+  }
+  
+  .doc-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .doc-preview-col {
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  #po-search {
+    width: 100%;
+  }
+  
+  .stat-cards {
+    grid-template-columns: 1fr;
+  }
+}
