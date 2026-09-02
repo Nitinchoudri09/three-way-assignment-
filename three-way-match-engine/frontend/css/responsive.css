@@ -1,44 +1,111 @@
+/* ============================================================
+   RESPONSIVE OVERRIDES
+   ============================================================ */
+
+/* Tablet: 768px – 1024px */
 @media (max-width: 1024px) {
-  .sidebar {
-    width: 64px;
-  }
-  
-  .sidebar-header {
-    font-size: 12px;
-    text-align: center;
-    padding: 20px 0;
-  }
-  
-  .sidebar-item span {
-    display: none;
-  }
-  
-  .doc-layout {
-    flex-direction: column;
+  .doc-top-row {
+    grid-template-columns: 1fr;
     height: auto;
   }
-  
+
+  .doc-info-col {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 320px;
+  }
+
   .doc-preview-col {
-    height: 500px;
+    height: 320px;
+  }
+
+  .stat-cards {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* Mobile: < 768px */
 @media (max-width: 768px) {
+  /* Sidebar collapses to bottom nav or hidden */
   .sidebar {
     display: none;
   }
-  
-  .header-actions {
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
-  }
-  
-  #po-search {
+
+  /* Full width main */
+  .main-content {
     width: 100%;
   }
-  
-  .stat-cards {
-    grid-template-columns: 1fr;
+
+  /* Stack header */
+  .top-header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 12px;
+    gap: 8px;
   }
+
+  .header-center { max-width: 100%; width: 100%; }
+
+  /* Stack doc layout */
+  .doc-top-row {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .doc-info-col {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 280px;
+  }
+
+  .doc-preview-col {
+    height: 280px;
+  }
+
+  /* Stat cards: 2 per row */
+  .stat-cards { grid-template-columns: repeat(2, 1fr); }
+  .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Full-width summary stats */
+  .summary-stats { grid-template-columns: 1fr; }
+
+  /* Tab bar scroll */
+  .tab-bar {
+    padding: 0 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  /* Content area padding */
+  .content-area { padding: 12px; }
+  .dashboard-content { padding: 12px; }
+
+  /* Page header compact */
+  .page-header-bar {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+
+  /* Modal full width on mobile */
+  .modal {
+    width: 95vw;
+    max-height: 85vh;
+  }
+}
+
+/* All tables scroll horizontally */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Never let tables cause page overflow */
+.data-table {
+  min-width: 600px;
+}
+
+/* Item grid table wider */
+.item-grid-table {
+  min-width: 900px;
 }

@@ -1,109 +1,304 @@
-.page-header {
-  padding: 20px 24px;
-  background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border-color);
-}
+/* ============================================================
+   DOCUMENTS / PO DETAIL LAYOUT
+   ============================================================ */
 
+/* ---- Main Tabs ---- */
 .tab-bar {
   display: flex;
-  background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0 24px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  flex-shrink: 0;
+  gap: 0;
 }
 
 .tab {
-  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  font-family: var(--font);
+  margin-bottom: -1px;
 }
 
-.tab:hover {
-  color: var(--text-main);
-}
+.tab:hover { color: var(--text-main); }
 
 .tab.active {
   color: var(--primary);
   border-bottom-color: var(--primary);
+  font-weight: 600;
 }
 
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+.tab.active .tab-count {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ---- Secondary Sub-tabs (Invoices / GRNs) ---- */
 .sub-tab-bar {
   display: flex;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 16px;
-  background-color: #F8FAFC;
-  padding: 0 24px;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-table-head);
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .sub-tab-bar .tab {
-  padding: 8px 16px;
-  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-bottom: 1px solid var(--border);
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  margin-bottom: 0;
 }
 
-.doc-layout {
-  display: flex;
-  gap: 24px;
-  padding: 24px;
-  height: calc(100vh - 160px);
+.sub-tab-bar .tab:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
 }
 
-.doc-info-col {
+.sub-tab-bar .tab.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ---- Document Layout: Two-col info+preview + full-width grid ---- */
+.doc-layout-wrapper {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  overflow-y: auto;
-}
-
-.doc-preview-col {
-  flex: 1;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.preview-controls {
-  padding: 8px 16px;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  background-color: #F8FAFC;
+.doc-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  height: 360px;
+  overflow: hidden;
 }
 
-.doc-preview {
+.doc-info-col {
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--bg-card);
+}
+
+.doc-info-inner {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doc-preview-col {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-table-head);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.preview-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.preview-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-zoom-btn {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.preview-zoom-btn:hover { background: var(--bg-hover); color: var(--text-main); }
+
+.preview-zoom-pct {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: center;
+}
+
+.doc-preview-frame {
   flex: 1;
   overflow: auto;
+  background: #E2E8F0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 16px;
-  background-color: #E2E8F0;
+  padding: 12px;
 }
 
-.doc-preview iframe, .doc-preview img {
+.doc-preview-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.doc-preview-frame img {
   max-width: 100%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  background-color: white;
-  transition: transform 0.2s;
-  transform-origin: top center;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: white;
 }
 
-.table-responsive {
-  overflow-x: auto;
+.preview-unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  flex: 1;
 }
 
-.cell-warning {
-  background-color: var(--status-partial-bg) !important;
+/* ---- Item Grid (full width below two-col) ---- */
+.doc-grid-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-card);
 }
 
-.cell-mismatch {
-  background-color: var(--status-mismatch-bg) !important;
+.doc-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-table-head);
+  flex-shrink: 0;
+}
+
+.doc-grid-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.doc-grid-body {
+  flex: 1;
+  overflow: auto;
+}
+
+/* ---- Summary Tab ---- */
+.summary-layout {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ---- Banners ---- */
+.doc-banners {
+  padding: 10px 16px 0;
+}
+
+/* ---- Page header inside PO pages ---- */
+.page-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ---- GRN/Invoice status pill ---- */
+.doc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+/* ---- Mismatch cell tooltip ---- */
+.mismatch-hint {
+  font-size: 10px;
+  color: var(--mismatch-text);
+  font-weight: 400;
+  display: block;
+  margin-top: 2px;
 }

@@ -3,26 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purchase Order Details - TWME</title>
+  <title>Purchase Order — Three-Way Match Engine</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/documents.css">
+  <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
   <div class="app-layout">
+
+    <!-- Icon Sidebar -->
     <aside id="sidebar-container"></aside>
+
+    <!-- Main -->
     <main class="main-content">
-      <header class="page-header" id="po-header">Loading...</header>
-      
+
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-brand">
+          <span class="header-app-name">Three-Way Match Engine</span>
+          <span class="header-sub" id="po-header-sub">Loading...</span>
+        </div>
+        <div class="header-actions">
+          <div id="po-header-status"></div>
+          <button class="header-icon-btn" id="upload-trigger-btn" title="Upload Document">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </button>
+          <a href="/dashboard.html" class="btn btn-ghost btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Dashboard
+          </a>
+        </div>
+      </header>
+
+      <!-- Document Tabs -->
       <div class="tab-bar" id="tab-bar">
-        <button class="tab active" data-tab="purchase-order">Purchase Order (1)</button>
-        <button class="tab" data-tab="fulfillment">Fulfillment (0)</button>
-        <button class="tab" data-tab="delivery">Delivery (0)</button>
+        <button class="tab active" data-tab="purchase-order">
+          Purchase Order <span class="tab-count" id="tc-po">1</span>
+        </button>
+        <button class="tab" data-tab="fulfillment">
+          Fulfillment <span class="tab-count" id="tc-inv">0</span>
+        </button>
+        <button class="tab" data-tab="delivery">
+          Delivery <span class="tab-count" id="tc-grn">0</span>
+        </button>
         <button class="tab" data-tab="summary">Summary</button>
       </div>
-      
-      <div id="tab-content">Loading...</div>
+
+      <!-- Tab Content -->
+      <div id="tab-content" class="doc-layout-wrapper">
+        <div class="loading-state"><div class="spinner"></div><span>Loading document...</span></div>
+      </div>
+
     </main>
   </div>
+
+  <!-- Upload Modal -->
+  <div id="upload-modal-container"></div>
+
+  <!-- Toast -->
+  <div id="toast-container" class="toast-container"></div>
+
   <script type="module" src="/js/purchase-order.js"></script>
 </body>
 </html>

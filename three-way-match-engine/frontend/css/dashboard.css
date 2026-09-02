@@ -1,26 +1,91 @@
-.header-actions {
+/* ============================================================
+   DASHBOARD-SPECIFIC STYLES
+   ============================================================ */
+
+/* Dashboard section */
+.dashboard-content {
+  padding: 16px 20px;
+}
+
+.dashboard-toolbar {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-#po-search {
-  width: 250px;
-  padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
+.dashboard-title {
   font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
-#po-search:focus {
-  outline: none;
-  border-color: var(--primary);
+.dashboard-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 320px;
 }
 
-.data-table tr {
+/* PO Table action column */
+.po-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--primary);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-sm);
+  background: var(--primary-muted);
   cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s;
 }
 
-.data-table tr:hover {
-  background-color: #F8FAFC;
+.po-action-btn:hover {
+  background: var(--primary-light);
+}
+
+/* PO table doc count pills */
+.doc-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.doc-count.has-docs {
+  background: var(--primary-muted);
+  color: var(--primary);
+  border-color: var(--primary-light);
+}
+
+/* Stat cards grid for dashboard */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1200px) {
+  .stat-cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
 }

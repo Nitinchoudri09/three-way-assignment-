@@ -3,91 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Three-Way Match Engine</title>
+  <title>Login — Three-Way Match Engine</title>
   <link rel="stylesheet" href="/css/style.css">
-  <style>
-    .login-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: var(--bg-page);
-    }
-    .login-card {
-      width: 400px;
-      padding: 40px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    .login-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .login-header h1 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    .login-header p {
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-    .demo-hint {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-  </style>
+  <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-header">
+  <div class="login-page">
+    <div class="login-container">
+      <div class="login-brand">
+        <div class="login-brand-mark">3W</div>
         <h1>Three-Way Match Engine</h1>
-        <p>Enterprise Procurement Platform</p>
+        <p>Enterprise Procurement Reconciliation Platform</p>
       </div>
-      <form id="login-form">
-        <div class="form-group">
-          <label class="form-label" for="username">Username</label>
-          <input type="text" id="username" class="form-input" required>
+
+      <div class="login-card">
+        <h2>Sign In</h2>
+
+        <div class="login-error" id="error-message"></div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" class="form-input" placeholder="Enter username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:4px;" id="login-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Sign In
+          </button>
+        </form>
+
+        <div class="login-hint">
+          Demo credentials &nbsp;·&nbsp; <strong>admin</strong> / <strong>admin123</strong>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="password">Password</label>
-          <input type="password" id="password" class="form-input" required>
-        </div>
-        <div id="error-message" style="color: red; font-size: 12px; margin-bottom: 16px; display: none;"></div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;" id="login-btn">Login</button>
-      </form>
-      <div class="demo-hint">Demo: admin / admin123</div>
+      </div>
     </div>
   </div>
 
+  <div id="toast-container" class="toast-container"></div>
+
   <script type="module">
     import { authAPI } from './js/api.js';
-    
+
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const u = document.getElementById('username').value;
+      const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value;
       const btn = document.getElementById('login-btn');
       const err = document.getElementById('error-message');
-      
+
       try {
         btn.disabled = true;
-        btn.textContent = 'Logging in...';
+        btn.innerHTML = '<span class="step-spinner"></span>&nbsp;Signing in...';
         err.style.display = 'none';
-        
+
         const res = await authAPI.login(u, p);
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user));
         window.location.href = '/dashboard.html';
       } catch (error) {
-        err.textContent = error.message;
+        err.textContent = error.message || 'Invalid credentials. Please try again.';
         err.style.display = 'block';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Login';
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Sign In`;
       }
     });
   </script>
